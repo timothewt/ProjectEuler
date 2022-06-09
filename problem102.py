@@ -8,7 +8,7 @@ class Coord:
         self.y = y
 
 
-def contains_point(m, tri):         # m being the point we want to know if it's in the triangle
+def contains_point(m, tr):         # m being the point we want to know if it's in the triangle
     A = Coord(tri[0][0], tri[0][1])
     B = Coord(tri[1][0], tri[1][1])
     C = Coord(tri[2][0], tri[2][1])
