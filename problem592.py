@@ -1,4 +1,24 @@
-def factorial(n):
+hex_numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+
+
+def decimal_to_hex(n):  # up to base 16
+    res = ""
+    current = n
+    while current > 0:
+        new_digit = current % 16
+        res = hex_numerals[new_digit] + res
+        current //= 16
+    return res
+
+
+def hex_to_decimal(n):
+    res = 0
+    for i in range(0, len(n)):
+        res += hex_numerals.index(n[i]) * (16 ** (len(n) - i - 1))
+    return res
+
+
+def decimal_factorial(n):
     res = 1
     for i in range(1, n + 1):
         res *= i
@@ -31,20 +51,9 @@ def clear_end_zeros(n):
     return n
 
 
-def to_base_n(number, n):  # up to base 16
-    numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
-    res = ""
-    current = number
-    while current > 0:
-        new_digit = current % n
-        res = numerals[new_digit] + res
-        current //= n
-    return res
-
-
 def f(N):
     fact_N = clean_16_factorial(N)
-    f_N_hex = to_base_n(fact_N, 16)
+    f_N_hex = decimal_to_hex(fact_N)
     f_N_hex_clean = f_N_hex
 
     f_N_hex_clean = clear_end_zeros(f_N_hex_clean)
@@ -53,4 +62,4 @@ def f(N):
 
 
 N = 20
-print("Last twelve digits of f("+str(N)+") without trailing zeros :", f(factorial(8)))  # can't go above 8, too much calculations
+print("Last twelve digits of f("+str(N)+") without trailing zeros :", f(decimal_factorial(N)))  # can't go above 8, too much calculations
