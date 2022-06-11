@@ -1,12 +1,12 @@
-from time import time
-
-
 with open("primes.txt") as f:  # the primes in the file are all the primes below 1 million
     primes = f.read()
 primes = primes.split(",")
 primes = [int(i) for i in primes]
 
+
 def prime_factors(n):
+    if n in primes:
+        return [n]
     res = []
     while n != 1:
         for p in primes:
@@ -18,22 +18,19 @@ def prime_factors(n):
     return res
 
 
-def euler_totient(n, pf):   # up to which numbers, prime factors
+def euler_totient(pf):  # up to which numbers, prime factors
+    res = 1
     for i in set(pf):
-        n *= 1 - (1 / i)
-    return n
+        res *= i ** (pf.count(i) - 1) * (i - 1)
+    return res
 
-count = 0
+# The result n/phi(n) will be the largest if n is a product of primes
 N = 10 ** 7
+res = 1
+i = 0
 
+while res * primes[i + 1] < N:
+    res *= primes[i]
+    i += 1
 
-start = time()
-
-for d in range(2, N + 1):
-    pf = prime_factors(d)
-    for i in range(1, d):
-        count += euler_totient(d, pf)
-
-print(time() - start)
-
-print("Number of reduced proper fraction for d <= 10^7 :", count)
+print("Optimal n :", res)
