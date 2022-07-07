@@ -26,6 +26,7 @@ def S(n):
 
 fib = fibonacci(90)
 res = 0
+
 for j in tqdm(fib):
     res += S(j)
     res %= 1_000_000_007
