@@ -9,3 +9,17 @@ def count(n):
 
 print(count(10))
 print(floor((5 - 3) / 2))
+
+for i in range(0, 10):
+    string = ''
+    for j in range(0, i):
+        string += '  '
+    for j in range(0, 10 - i):
+        string += 'o   '
+    print(string)
+print('')
+string = ''
+for j in range(0, 9):
+    string += '  '
+string += 'o'
+print(string)
